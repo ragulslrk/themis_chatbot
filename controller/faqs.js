@@ -1,6 +1,7 @@
 const  route=require('express').Router()
 const faq=require("../model/faq")
 const user=require('../model/user')
+const nodemailer=require("nodemailer")
 
 route.post('/ask',(req,res)=>{
     console.log('IN ASK')
@@ -28,7 +29,37 @@ route.post('/add_ans',(req,res)=>{
         console.log(err)
              }
     else
+
+
     {   console.log(result)
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'ragulaids@smvec.ac.in',
+              pass:'aidssmvec',
+            },
+          });
+          
+          let mailOptions = {
+            from: 'ragulaids@smvec.ac.in',
+            to: result.email,
+            subject: `Reset Password Link`,
+            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+           
+          };
+          
+          transporter.sendMail(mailOptions, function (err, info) {
+            if (err) {
+              res.json(err);
+            } else {
+              
+              req.flash('info', 'Email has sent to your mail')
+              return res.redirect('/forgot');
+            }
+          });
         res.send('updated sucessfully')
     }
 
