@@ -1,0 +1,17 @@
+  const user_data=new user({
+        "username":req.body.username,
+        "password":req.body.password,
+        "email":req.body.email,
+        "phoneno":req.body.phoneno,
+        "name":req.body.name
+    })
+    user_data.save()
+    const user_data=new user({
+        "username":req.body.username,
+        "password":hash,
+        "email":req.body.email,
+        "phoneno":req.body.phoneno,
+        "name":req.body.name,
+        "role":req.body.role
+    })
+    user_data.save()

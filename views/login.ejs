@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Trav2Indie|Login</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="icon" type="image/x-icon" href="assets/images/logo.SVG">
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container ">
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="login-wrap p-4 p-md-5 card">
+					<div class=" d-flex align-items-center justify-content-center">
+						<img class="logo" src="assets/images/logo.svg" style="width:150px;" alt="">
+					</div>
+					<br>
+					<br>
+					<form  method="get" action="/login" class="needs-validation" novalidate>
+						<%if(message.length>0){%>
+							<div class="alert alert-danger" role="alert">
+								<%=message%>
+							  </div>
+							  <%}%>
+							  <%if(info.length>0){%>
+								<div class="alert alert-success" role="alert">
+									<%=info%>
+								  </div>
+								  <%}%>
+					<div class="form-group">
+						<input type="text"  class="form-control rounded-left font" placeholder="Username"  name="username" required>
+						<div class="valid-feedback">
+							Looks good!
+						  </div>
+						   <div class="invalid-feedback">
+											Please enter your username .
+										  </div>
+					</div>
+					<div class="form-group ">
+						<input type="password" id="myInput" class="form-control rounded-left font" placeholder="Password"  name="password" required>
+						<div class="valid-feedback">
+							Looks good!
+						  </div>
+						   <div class="invalid-feedback">
+											Please enter your password.
+										  </div>
+					</div>
+					<div class="w-50">
+					<label class="checkbox-wrap checkbox-primary font">Show password
+								<input type="checkbox" onclick="myFunction()">
+								<span class="checkmark"></span>
+								</label>
+					</div>
+				<div class="form-group">
+					<button type="submit" class="form-control btn btn-primary rounded submit px-3 font">Login</button>
+				</div>
+			<div class="form-group d-md-flex">
+					<div class="w-50">
+								</div>
+								<div class="w-50 text-md-right font" >
+									<a id="frbtn" href="/forgot">Forgot Password?</a>
+								</div>
+	</div>
+	</form>
+	</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		function myFunction() {
+			var x = document.getElementById("myInput");
+			if (x.type === "password") {
+				x.type = "text";
+			} else {
+				x.type = "password";
+			}
+}
+	</script>
+  <script>
+	// Example starter JavaScript for disabling form submissions if there are invalid fields
+
+(function () {
+'use strict'
+
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+var forms = document.querySelectorAll('.needs-validation')
+
+// Loop over them and prevent submission
+Array.prototype.slice.call(forms)
+.forEach(function (form) {
+  form.addEventListener('submit', function (event) {
+	if (!form.checkValidity()) {
+	  event.preventDefault()
+	  event.stopPropagation()
+	}
+
+	form.classList.add('was-validated')
+  }, false)
+})
+})()
+	</script>
+	</body>
+</html>
+
