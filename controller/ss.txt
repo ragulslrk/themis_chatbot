@@ -15,3 +15,33 @@
         "role":req.body.role
     })
     user_data.save()
+
+
+
+
+    .then((users)=>{
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'slrk4444@gmail.com',
+                  pass:'slrkslrk',
+                },
+              });
+              
+              let mailOptions = {
+                from: 'slrk4444@gmail.com',
+                to: users.email,
+                subject: `Reply for your query(Themis)`,
+                text: 'Your Question:'+result.question+'Answer:'+result.question
+               
+              };
+              
+              transporter.sendMail(mailOptions, function (err, info) {
+                if (err) {
+                  res.json(err);
+                } else {
+                  
+                    res.send('updated sucessfully')
+                }
+              });
+        })

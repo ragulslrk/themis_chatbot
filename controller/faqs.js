@@ -31,35 +31,40 @@ route.post('/add_ans',(req,res)=>{
     else
 
 
-    {   console.log(result)
+    {   
 
-        user.findOne({username:result.question_username})
-        .then((users)=>{
-            let transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                  user: 'slrk4444@gmail.com',
-                  pass:'slrkslrk',
-                },
-              });
-              
-              let mailOptions = {
-                from: 'slrk4444@gmail.com',
-                to: users.email,
-                subject: `Reply for your query(Themis)`,
-                text: 'Your Question:'+result.question+'Answer:'+result.question
-               
-              };
-              
-              transporter.sendMail(mailOptions, function (err, info) {
-                if (err) {
-                  res.json(err);
-                } else {
+        faq.findOne({_id:req.body.id})
+        .then((faq_user)=>{
+            user.find({username:faq_user.question_username})
+            .then((users)=>{
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: 'slrk4444@gmail.com',
+                      pass:'slrkslrk',
+                    },
+                  });
                   
-                    res.send('updated sucessfully')
-                }
-              });
+                  let mailOptions = {
+                    from: 'slrk4444@gmail.com',
+                    to: users.email,
+                    subject: `Reply for your query(Themis)`,
+                    text: 'Your Question:'+result.question+'Answer:'+result.question
+                   
+                  };
+                  
+                  transporter.sendMail(mailOptions, function (err, info) {
+                    if (err) {
+                      res.json(err);
+                    } else {
+                      
+                        res.send('updated sucessfully')
+                    }
+                  });
+            })
         })
+
+        
        
         
     }
