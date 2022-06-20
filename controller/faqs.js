@@ -35,21 +35,22 @@ route.post('/add_ans',(req,res)=>{
 
         faq.findOne({_id:req.body.id})
         .then((faq_user)=>{
-            user.find({username:faq_user.question_username})
+            user.findOne({username:faq_user.question_username})
             .then((users)=>{
+                console.log('this is user:',users)
                 let transporter = nodemailer.createTransport({
-                    service: 'gmail',
+                    service: 'yahoo',
                     auth: {
-                      user: 'slrk4444@gmail.com',
-                      pass:'slrkslrk',
+                      user: 'themis.bot@yahoo.com',
+                      pass:'kjyvtllhirfvbrke',
                     },
                   });
                   
                   let mailOptions = {
-                    from: 'slrk4444@gmail.com',
+                    from: 'themis.bot@yahoo.com',
                     to: users.email,
                     subject: `Reply for your query(Themis)`,
-                    text: 'Your Question:'+result.question+'Answer:'+result.question
+                    text: 'Your Question : '+faq_user.question+'\nAnswer : '+faq_user.answer+'\n your Query was answered by: '+faq_user.answer_lawyername+'.'
                    
                   };
                   
