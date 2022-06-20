@@ -33,7 +33,7 @@ mongoose.connect( process.env.db,{useNewUrlParser: true,useUnifiedTopology: true
 
 
 app.get('/',(req,res)=>{
-    res.send("this is  home  page")
+    res.send("This Page contains Api For Themis Chatbot")
 })
     //route  to signup  
     const signup=require("./controller/signup")

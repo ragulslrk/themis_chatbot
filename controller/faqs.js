@@ -14,7 +14,7 @@ route.post('/ask',(req,res)=>{
 })
 route.post('/fetch',(req,res)=>{
     console.log('in fetch')
-    faq.find({is_answered:'0'}).limit(5)
+    faq.find({is_answered:'0'}).limit(3)
     .then((result)=>{
             res.send(result)
     })
