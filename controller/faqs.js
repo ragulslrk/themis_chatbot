@@ -32,35 +32,36 @@ route.post('/add_ans',(req,res)=>{
 
 
     {   console.log(result)
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'ragulaids@smvec.ac.in',
-              pass:'aidssmvec',
-            },
-          });
-          
-          let mailOptions = {
-            from: 'ragulaids@smvec.ac.in',
-            to: result.email,
-            subject: `Reset Password Link`,
-            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-           
-          };
-          
-          transporter.sendMail(mailOptions, function (err, info) {
-            if (err) {
-              res.json(err);
-            } else {
+
+        user.findOne({username:result.question_username})
+        .then((users)=>{
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'slrk4444@gmail.com',
+                  pass:'slrkslrk',
+                },
+              });
               
-              req.flash('info', 'Email has sent to your mail')
-              return res.redirect('/forgot');
-            }
-          });
-        res.send('updated sucessfully')
+              let mailOptions = {
+                from: 'slrk4444@gmail.com',
+                to: users.email,
+                subject: `Reply for your query(Themis)`,
+                text: 'Your Question:'+result.question+'Answer:'+result.question
+               
+              };
+              
+              transporter.sendMail(mailOptions, function (err, info) {
+                if (err) {
+                  res.json(err);
+                } else {
+                  
+                    res.send('updated sucessfully')
+                }
+              });
+        })
+       
+        
     }
 
     })
