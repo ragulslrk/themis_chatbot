@@ -24,7 +24,7 @@ app.use(express.static('assets'))
 
 mongoose.connect( process.env.db,{useNewUrlParser: true,useUnifiedTopology: true})
     .then((res)=>{
-        app.listen(3232,()=>{
+        app.listen(process.env.PORT ||3232,()=>{
         console.log("listening themis")
     })
   
